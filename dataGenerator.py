@@ -8,14 +8,14 @@ import pandas as pd
 import torchvision
 import matplotlib.pyplot as plt
 
-PATH = "data/"
-PHOTOS_PATH = PATH + "photos/"
-TENSOR_PATH = PATH + "tensors/"
+#PATH = "data/"
+#PHOTOS_PATH = PATH + "photos/"
+#TENSOR_PATH = PATH + "tensors/"
 
 class dataGenerator(object):
 
-    def __init__(self, IMAGE_SIZE=400):
-        self.IMAGE_SIZE=400
+    def __init__(self, IMAGE_SIZE=416):
+        self.IMAGE_SIZE=416
     
     def drawBackground(self,imgMap):
         rgb = (randint(0,255),randint(0,255),randint(0,255))
