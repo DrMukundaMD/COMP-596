@@ -54,11 +54,11 @@ class dataGenerator(object):
 
         return img, tensorMap
     
-    def showMaskOnImage(self, img, tensor):
+    def showMaskOnImage(self, img, tensor, threshold):
         imgTemp = img.copy()
         imgMap = imgTemp.load()
         for i in range(0, self.IMAGE_SIZE):
             for j in range(0, self.IMAGE_SIZE):
-                if tensor[0,i,j] == 1:
-                    imgMap[i,j] = (255,0,0)
+                if tensor[0,i,j] < threshold:
+                    imgMap[i,j] = (255,255,255)
         return imgTemp
