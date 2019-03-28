@@ -1,6 +1,6 @@
 import plotly
 from plotly.offline import iplot, init_notebook_mode
-import plotly.plotly as py
+#import plotly.plotly as py
 import plotly.graph_objs as go
 import plotly.io as pio
 
@@ -8,10 +8,14 @@ import os
 
 init_notebook_mode(connected=True)
 
+plotly.io.orca.config.executable = '/home/royce/orca/orca-1.2.1-x86_64.AppImage'
+plotly.io.orca.config.save() 
+
 class potly(object):
-    #def __init__(self):
+    def __init__(self):
+        __
     
-    def save_plot(self, train_y, val_y, output_dir):
+    def save_plot(self, train_y, val_y, output_dir, filename):
 #         if(len(train_y) != len(val_y)):
 #             print("Train not same length as validation")
         
@@ -51,6 +55,6 @@ class potly(object):
         fig = go.Figure(data=data, layout=layout)
         
         # double check to make sure if directory exists
-        os.makedirs(outputs_dir, exist_ok=True)
+        os.makedirs(output_dir, exist_ok=True)
         
-        pio.write_image(fig, outputs_dir + 'images/fig1.png')
+        pio.write_image(fig, output_dir + filename + '.png')
