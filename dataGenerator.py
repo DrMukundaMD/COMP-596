@@ -62,3 +62,5 @@ class dataGenerator(object):
                 if tensor[0,i,j] < threshold:
                     imgMap[i,j] = (255,255,255)
         return imgTemp
+
+

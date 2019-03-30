@@ -6,6 +6,8 @@ import plotly.io as pio
 
 import os
 
+#plotly.__version__
+
 init_notebook_mode(connected=True)
 
 plotly.io.orca.config.executable = '/home/royce/orca/orca-1.2.1-x86_64.AppImage'
