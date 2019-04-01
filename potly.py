@@ -14,9 +14,10 @@ plotly.io.orca.config.executable = '/home/royce/orca/orca-1.2.1-x86_64.AppImage'
 plotly.io.orca.config.save() 
 
 class potly(object):
-    def __init__(self):
-        __
+    def __init__(self, pot=0):
+        self.pot = 0
     
+
     def save_plot(self, train_y, val_y, output_dir, filename):
 #         if(len(train_y) != len(val_y)):
 #             print("Train not same length as validation")
@@ -60,3 +61,5 @@ class potly(object):
         os.makedirs(output_dir, exist_ok=True)
         
         pio.write_image(fig, output_dir + filename + '.png')
+
+        
