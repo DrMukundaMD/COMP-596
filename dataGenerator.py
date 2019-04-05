@@ -63,4 +63,11 @@ class dataGenerator(object):
                     imgMap[i,j] = (255,255,255)
         return imgTemp
 
-
+    def showDefaultTensor(self, img, tensor, threshold):
+        imgTemp = img.copy()
+        imgMap = imgTemp.load()
+        for i in range(0, self.IMAGE_SIZE):
+            for j in range(0, self.IMAGE_SIZE):
+                if tensor[0,i,j] == 1:
+                    imgMap[i,j] = (255,0,0)
+        return imgTemp
