@@ -313,34 +313,18 @@ class UNet16_5(nn.Module):
         self.relu = nn.ReLU(inplace=True)
 
         self.conv1 = nn.Sequential(self.encoder[0],
-                                   self.relu,
-                                   self.encoder[2],
                                    self.relu)
 
         self.conv2 = nn.Sequential(self.encoder[5],
-                                   self.relu,
-                                   self.encoder[7],
                                    self.relu)
 
         self.conv3 = nn.Sequential(self.encoder[10],
-                                   self.relu,
-                                   self.encoder[12],
-                                   self.relu,
-                                   self.encoder[14],
                                    self.relu)
 
         self.conv4 = nn.Sequential(self.encoder[17],
-                                   self.relu,
-                                   self.encoder[19],
-                                   self.relu,
-                                   self.encoder[21],
                                    self.relu)
 
         self.conv5 = nn.Sequential(self.encoder[24],
-                                   self.relu,
-                                   self.encoder[26],
-                                   self.relu,
-                                   self.encoder[28],
                                    self.relu)
 
         self.center = DecoderBlockV2(512, num_filters * 8 * 2, num_filters * 8, is_deconv)
@@ -354,18 +338,18 @@ class UNet16_5(nn.Module):
 
     def forward(self, x):
         conv1 = self.conv1(x)
-        #conv2 = self.conv2(self.pool(conv1))
         conv2 = self.conv2(self.pool(conv1))
-        #conv3 = self.conv3(self.pool(conv2))
-        #conv4 = self.conv4(self.pool(conv3))
-        conv5 = self.conv5(self.pool(conv2))
+        conv3 = self.conv3(self.pool(conv2))
+        conv4 = self.conv4(self.pool(conv3))
+        #conv5 = self.conv5(self.pool(conv4))
 
-        center = self.center(self.pool(conv5))
+        center = self.center(self.pool(conv4))
 
-        dec5 = self.dec5(torch.cat([center, conv5], 1))
+        dec4 = self.dec5(torch.cat([center, conv4], 1))
+
         #dec4 = self.dec4(torch.cat([dec5, conv4], 1))
-        #dec3 = self.dec3(torch.cat([dec4, conv3], 1))
-        dec2 = self.dec2(torch.cat([dec5, conv2], 1))
+        dec3 = self.dec3(torch.cat([dec4, conv3], 1))
+        dec2 = self.dec2(torch.cat([dec3, conv2], 1))
         dec1 = self.dec1(torch.cat([dec2, conv1], 1))
 
         if self.num_classes > 1:
