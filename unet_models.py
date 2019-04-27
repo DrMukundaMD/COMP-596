@@ -358,3 +358,26 @@ class UNet16_5(nn.Module):
             x_out = self.final(dec1)
 
         return x_out
+
+
+class UNet1(nn.Module):
+    def __init__(self, num_classes=1, num_filters=32, pretrained=False, is_deconv=False):
+        """
+        :param num_classes:
+        :param num_filters:
+        :param pretrained:
+            False - no pre-trained network used
+            True - encoder pre-trained with VGG16
+        :is_deconv:
+            False: bilinear interpolation is used in decoder
+            True: deconvolution is used in decoder
+        """
+        super().__init__()
+
+        self.conv = nn.Sequential(
+            nn.Conv2d(3,1,3, padding=1),
+            nn.ReLU(inplace=True))
+
+    def forward(self, x):
+        x = self.conv(x)
+        return x
