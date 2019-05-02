@@ -25,3 +25,7 @@ _All training and validation occured in this file_
 
 _Test File... (testing), logly (logging), potly (plotting graphs)_
 
+## Results
+![Stripped VGG16 Network](/results/Striped VGG16 Network.png)
+
+![Single Convolution Network](/results/Single Conv Network.png)
