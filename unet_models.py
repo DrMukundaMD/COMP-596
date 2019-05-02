@@ -360,7 +360,7 @@ class UNet16_5(nn.Module):
         return x_out
 
 
-class UNet1(nn.Module):
+class MyNet1(nn.Module):
     def __init__(self, num_classes=1, num_filters=32, pretrained=False, is_deconv=False):
         """
         :param num_classes:
@@ -375,9 +375,37 @@ class UNet1(nn.Module):
         super().__init__()
 
         self.conv = nn.Sequential(
-            nn.Conv2d(3,1,3, padding=1),
+            nn.Conv2d(3, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),
             nn.ReLU(inplace=True))
 
     def forward(self, x):
         x = self.conv(x)
+        return x
+
+
+class MyNet2(nn.Module):
+    def __init__(self, num_classes=1, num_filters=32, pretrained=False, is_deconv=False):
+        """
+        :param num_classes:
+        :param num_filters:
+        :param pretrained:
+            False - no pre-trained network used
+            True - encoder pre-trained with VGG16
+        :is_deconv:
+            False: bilinear interpolation is used in decoder
+            True: deconvolution is used in decoder
+        """
+        super().__init__()
+
+        self.conv = nn.Sequential(
+            nn.Conv2d(3, 2, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),
+            nn.ReLU(inplace=True))
+        self.conv2 = nn.Sequential(
+            nn.Conv2d(2, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),
+            nn.ConvTranspose2d(1, 1, kernel_size=3, stride=1, padding=1)
+            nn.ReLU(inplace=True))
+
+    def forward(self, x):
+        x = self.conv(x)
+        x = self.conv2(x)
         return x
