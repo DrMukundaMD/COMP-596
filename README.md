@@ -11,7 +11,7 @@ _The jupyter notebook was used mostly for testing. The .py file contains the fin
 ### Network Architecture
 * unet_models.py
 
-_UNet16 (VGG16), UNet1, MyNet1, MyNet2 were used from this file_
+_UNet16 (VGG16), UNet1 (renamed MyNet1), MyNet2 were used from this file_
 
 ### Training
 * Load and Run.ipynb
