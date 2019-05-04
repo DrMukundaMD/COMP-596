@@ -402,7 +402,7 @@ class MyNet2(nn.Module):
             nn.ReLU(inplace=True))
         self.conv2 = nn.Sequential(
             nn.Conv2d(2, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),
-            nn.ConvTranspose2d(1, 1, kernel_size=3, stride=1, padding=1)
+            nn.ConvTranspose2d(1, 1, kernel_size=3, stride=1, padding=1),
             nn.ReLU(inplace=True))
 
     def forward(self, x):
